@@ -21,6 +21,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderProducerService orderProducerService;
+    private final RedisService redisService;
 
     /**
      * Creates a new order and saves it to MongoDB.
@@ -40,6 +41,9 @@ public class OrderService {
 
         Order savedOrder = orderRepository.save(order);
         log.info("Order saved with ID: {}", savedOrder.getId());
+
+        // Update Analytics Counter in Redis
+        redisService.incrementOrderCount();
 
         // Publish event to Kafka
         orderProducerService.publishOrderCreatedEvent(savedOrder);
