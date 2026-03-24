@@ -3,6 +3,7 @@ package com.example.orderapp.controller;
 import com.example.orderapp.dto.CreateOrderRequest;
 import com.example.orderapp.dto.OrderResponse;
 import com.example.orderapp.service.OrderService;
+import com.example.orderapp.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
 
     private final OrderService orderService;
+    private final RedisService redisService;
 
     /**
      * Endpoint to create a new order.
@@ -30,5 +32,17 @@ public class OrderController {
         log.info("Received request to create order for userId: {}", request.getUserId());
         OrderResponse response = orderService.createOrder(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    /**
+     * Fetches current order status from Redis cache.
+     * @param id The order ID.
+     * @return Current status.
+     */
+    @GetMapping("/{id}/status")
+    public ResponseEntity<String> getOrderStatus(@PathVariable String id) {
+        log.info("Fetching status for order: {}", id);
+        String status = redisService.getOrderStatus(id);
+        return status != null ? ResponseEntity.ok(status) : ResponseEntity.notFound().build();
     }
 }
