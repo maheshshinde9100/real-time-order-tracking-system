@@ -1,0 +1,238 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.example.orderapp:order-service >-----------------
+[INFO] Building Order Service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ order-service ---
+[INFO] Deleting D:\real-time-order-tracking-system\server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ order-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ order-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 15 source files with javac [debug parameters release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/AnalyticsController.java:[18,32] variable redisService not initialized in the default constructor
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[26,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[42,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[55,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[32,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.controller.OrderController
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[32,76] cannot find symbol
+  symbol:   method getUserId()
+  location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[44,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.controller.OrderController
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[32,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.service.OrderService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[32,59] cannot find symbol
+  symbol:   method getProductName()
+  location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[34,28] cannot find symbol
+  symbol:   method builder()
+  location: class com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[35,32] cannot find symbol
+  symbol:   method getUserId()
+  location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[36,37] cannot find symbol
+  symbol:   method getProductName()
+  location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[37,32] cannot find symbol
+  symbol:   method getAmount()
+  location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[43,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.service.OrderService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[43,55] cannot find symbol
+  symbol:   method getId()
+  location: variable savedOrder of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[55,29] cannot find symbol
+  symbol:   method builder()
+  location: class com.example.orderapp.dto.OrderResponse
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[56,26] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[57,30] cannot find symbol
+  symbol:   method getUserId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[58,35] cannot find symbol
+  symbol:   method getProductName()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[59,30] cannot find symbol
+  symbol:   method getAmount()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[60,30] cannot find symbol
+  symbol:   method getStatus()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[61,33] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[25,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.kafka.OrderProducerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[25,68] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[26,66] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/exception/GlobalExceptionHandler.java:[20,37] constructor ErrorDetails in class com.example.orderapp.exception.GlobalExceptionHandler.ErrorDetails cannot be applied to given types;
+  required: no arguments
+  found:    java.time.LocalDateTime,java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[29,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.kafka.OrderConsumerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[29,66] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[32,14] cannot find symbol
+  symbol:   method setStatus(java.lang.String)
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[36,43] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[36,58] cannot find symbol
+  symbol:   method getStatus()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[39,43] cannot find symbol
+  symbol:   method getUserId()
+  location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[41,9] cannot find symbol
+  symbol:   variable log
+  location: class com.example.orderapp.kafka.OrderConsumerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[41,83] cannot find symbol
+  symbol:   method getId()
+  location: variable order of type com.example.orderapp.model.Order
+[INFO] 34 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.471 s
+[INFO] Finished at: 2026-03-25T00:01:48+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project order-service: Compilation failure: Compilation failure: 
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/AnalyticsController.java:[18,32] variable redisService not initialized in the default constructor
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[26,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[42,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/RedisService.java:[55,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.service.RedisService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[32,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.controller.OrderController
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[32,76] cannot find symbol
+[ERROR]   symbol:   method getUserId()
+[ERROR]   location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/controller/OrderController.java:[44,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.controller.OrderController
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[32,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.service.OrderService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[32,59] cannot find symbol
+[ERROR]   symbol:   method getProductName()
+[ERROR]   location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[34,28] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[35,32] cannot find symbol
+[ERROR]   symbol:   method getUserId()
+[ERROR]   location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[36,37] cannot find symbol
+[ERROR]   symbol:   method getProductName()
+[ERROR]   location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[37,32] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable request of type com.example.orderapp.dto.CreateOrderRequest
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[43,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.service.OrderService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[43,55] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable savedOrder of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[55,29] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.example.orderapp.dto.OrderResponse
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[56,26] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[57,30] cannot find symbol
+[ERROR]   symbol:   method getUserId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[58,35] cannot find symbol
+[ERROR]   symbol:   method getProductName()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[59,30] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[60,30] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/service/OrderService.java:[61,33] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[25,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.kafka.OrderProducerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[25,68] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderProducerService.java:[26,66] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/exception/GlobalExceptionHandler.java:[20,37] constructor ErrorDetails in class com.example.orderapp.exception.GlobalExceptionHandler.ErrorDetails cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.time.LocalDateTime,java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[29,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.kafka.OrderConsumerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[29,66] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[32,14] cannot find symbol
+[ERROR]   symbol:   method setStatus(java.lang.String)
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[36,43] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[36,58] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[39,43] cannot find symbol
+[ERROR]   symbol:   method getUserId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[41,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.example.orderapp.kafka.OrderConsumerService
+[ERROR] /D:/real-time-order-tracking-system/server/src/main/java/com/example/orderapp/kafka/OrderConsumerService.java:[41,83] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable order of type com.example.orderapp.model.Order
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
