@@ -94,7 +94,7 @@ const TrackOrder = () => {
       </div>
 
       {/* Search Bar */}
-      <form onSubmit={handleSearch} className="glass p-4 rounded-3xl flex items-center gap-4 border border-white/5 focus-within:border-primary/40 focus-within:ring-8 focus-within:ring-primary/5 transition-all shadow-2xl relative overflow-hidden group">
+      <form onSubmit={handleSearch} className="glass-dark card-glow-primary p-4 rounded-3xl flex items-center gap-4 border border-white/5 focus-within:border-primary/40 focus-within:ring-8 focus-within:ring-primary/5 transition-all shadow-2xl relative overflow-hidden group">
          <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent top-0 opacity-0 group-focus-within:opacity-100 transition-opacity" />
          <Search className="w-6 h-6 text-slate-500 ml-2" />
          <input 
@@ -115,12 +115,12 @@ const TrackOrder = () => {
       {/* Tracking Canvas */}
       <AnimatePresence mode="wait">
         {status ? (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="glass rounded-[3rem] p-12 flex flex-col items-center gap-16 border border-white/5 shadow-2xl relative overflow-hidden h-[450px] justify-center"
-          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="glass card-glow-primary rounded-[3rem] p-12 flex flex-col items-center gap-16 border border-white/5 shadow-2xl relative overflow-hidden h-[450px] justify-center"
+            >
             <div className={`absolute top-0 inset-x-0 h-[200px] bg-gradient-to-b from-primary/5 to-transparent pointer-events-none`} />
             
             <div className="flex flex-col items-center gap-3">
@@ -162,7 +162,7 @@ const TrackOrder = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-[3rem] p-20 flex flex-col items-center justify-center gap-6 border border-error/10 text-center"
+            className="glass-dark rounded-[3rem] p-20 flex flex-col items-center justify-center gap-6 border border-error/10 text-center"
           >
             <div className="w-20 h-20 rounded-full bg-error/10 flex items-center justify-center border-2 border-error/20">
               <AlertCircle className="w-10 h-10 text-error" />

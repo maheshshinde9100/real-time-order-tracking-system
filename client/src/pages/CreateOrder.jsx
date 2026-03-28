@@ -32,7 +32,7 @@ const CreateOrder = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-12 max-w-5xl mx-auto py-10">
       {/* Form Section */}
-      <div className="flex-1 glass rounded-[2.5rem] p-10 flex flex-col gap-10 border border-white/5 shadow-2xl relative overflow-hidden">
+      <div className="flex-1 glass card-glow-primary rounded-[2.5rem] p-10 flex flex-col gap-10 border border-white/5 shadow-2xl relative overflow-hidden">
         <div className={`absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[150px] opacity-10 bg-primary`} />
         
         <div className="flex flex-col gap-2 relative z-10">
@@ -98,7 +98,7 @@ const CreateOrder = () => {
 
       {/* Info Section */}
       <div className="lg:w-80 flex flex-col gap-6">
-        <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-6 relative overflow-hidden group">
+        <div className="glass-dark card-glow-primary p-8 rounded-[2rem] border border-white/5 flex flex-col gap-6 relative overflow-hidden group">
           <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 rotate-3 transition-transform group-hover:rotate-0">
              <Info className="w-6 h-6 text-primary" />
           </div>
