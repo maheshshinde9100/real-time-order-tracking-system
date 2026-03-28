@@ -45,4 +45,14 @@ public class OrderController {
         String status = redisService.getOrderStatus(id);
         return status != null ? ResponseEntity.ok(status) : ResponseEntity.notFound().build();
     }
+
+    /**
+     * Lists all orders from MongoDB.
+     * @return List of all orders.
+     */
+    @GetMapping
+    public ResponseEntity<Iterable<OrderResponse>> getAllOrders() {
+        log.info("Fetching all orders from database.");
+        return ResponseEntity.ok(orderService.getAllOrders());
+    }
 }
