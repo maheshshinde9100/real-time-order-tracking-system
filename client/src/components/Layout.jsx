@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
       
       {/* Dynamic Ticker/Footer or status bar */}
       <footer className="fixed bottom-0 w-full glass h-10 flex items-center justify-center border-t border-white/5 opacity-50 text-[10px] tracking-widest text-slate-400 uppercase font-bold uppercase transition-opacity hover:opacity-100 z-50">
-        &copy; 2026 Event-Driven Orders &bull; Real-time Kafka Infrastructure &bull; Spring Boot &bull; Redis Cache
+        &copy; 2026 Event-Driven Orders | Real-time Kafka Infrastructure | Spring Boot | Redis Cache
       </footer>
     </div>
   );
