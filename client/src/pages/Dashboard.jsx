@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ShoppingCart, TrendingUp, Package, Activity, ChevronRight, Bell } from "lucide-react";
-import { getOrderAnalytics, getNotifications } from "../services/api";
+import { getOrderAnalytics, getNotifications, getAllOrders } from "../services/api";
 import { motion } from "framer-motion";
 
 const StatCard = ({ icon: Icon, title, value, color }) => (
@@ -34,6 +34,7 @@ const NotificationItem = ({ message, time }) => (
 const Dashboard = () => {
   const [analytics, setAnalytics] = useState({ count: 0 });
   const [notifications, setNotifications] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,8 +42,11 @@ const Dashboard = () => {
       try {
         const count = await getOrderAnalytics();
         const notices = await getNotifications();
+        const allOrders = await getAllOrders();
         setAnalytics({ count });
         setNotifications(notices || []);
+        // Get the latest 5 orders
+        setOrders(allOrders.slice(0, 5) || []);
       } catch (err) {
         console.error("Failed to fetch dashboard data", err);
       } finally {
@@ -63,16 +67,9 @@ const Dashboard = () => {
           <h1 className="text-5xl font-black italic uppercase tracking-tighter text-white">System <span className="text-primary tracking-normal not-italic">Overview</span></h1>
           <p className="text-slate-400 font-medium">Monitoring real-time order processing through Kafka events.</p>
         </div>
-        <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/5 backdrop-blur-md">
-          <div className="flex -space-x-2">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 flex items-center justify-center text-[10px] uppercase font-bold text-slate-400">
-                U{i}
-              </div>
-            ))}
-          </div>
-          <div className="h-6 w-px bg-white/10 mx-1" />
-          <span className="text-xs font-bold text-white pr-2">10.4K Active Users</span>
+        <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/5 backdrop-blur-md text-white">
+          <Activity className="w-4 h-4 text-primary animate-pulse ml-2" />
+          <span className="text-xs font-bold uppercase tracking-widest pr-2">Processing Live Events</span>
         </div>
       </div>
 
@@ -104,18 +101,61 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Main content area */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
-        {/* Recent Notifications */}
-        <div className="lg:col-span-1 glass rounded-[2.5rem] p-8 flex flex-col gap-6 max-h-[600px] border border-white/5 shadow-2xl">
+      {/* Main content grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Active Orders Section */}
+        <div className="lg:col-span-2 flex flex-col gap-6">
+           <div className="flex items-center justify-between px-2">
+             <h2 className="text-xl font-bold flex items-center gap-2 text-white uppercase italic tracking-tighter">
+                Recent <span className="text-primary not-italic">Orders</span>
+             </h2>
+             <TrendingUp className="w-5 h-5 text-primary opacity-50" />
+           </div>
+           
+           <div className="flex flex-col gap-4">
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <div key={order.id} className="glass p-5 rounded-3xl border border-white/10 flex items-center justify-between group hover:bg-white/5 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-primary border border-primary/20">
+                        <Package className="w-6 h-6" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-white uppercase tracking-tight">{order.productName || 'Unnamed Product'}</span>
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">ORDER #{order.id.slice(-6)}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                       <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border transition-colors ${
+                         order.status === 'DELIVERED' ? 'bg-success/10 text-success border-success/30' : 
+                         order.status === 'SHIPPED' ? 'bg-accent/10 text-accent border-accent/20' : 
+                         'bg-primary/10 text-primary border-primary/20'
+                       }`}>
+                         {order.status}
+                       </span>
+                       <div className="text-right flex flex-col mr-2">
+                          <span className="text-sm font-black text-white tabular-nums">${order.amount.toLocaleString()}</span>
+                          <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">USD</span>
+                       </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="glass rounded-[2rem] py-20 flex flex-col items-center justify-center gap-4 border-dashed border-white/5 opacity-50 italic text-slate-500">
+                  <Package className="w-10 h-10" />
+                  <p className="text-sm font-bold uppercase tracking-widest">No orders found</p>
+                </div>
+              )}
+           </div>
+        </div>
+
+        {/* Notifications sidebar */}
+        <div className="lg:col-span-2 glass rounded-[2.5rem] p-8 flex flex-col gap-6 max-h-[600px] border border-white/5 shadow-2xl">
           <div className="flex items-center justify-between px-2">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Bell className="w-5 h-5 text-primary" />
-              Recent <span className="opacity-50">Events</span>
+            <h2 className="text-xl font-bold flex items-center gap-2 text-white uppercase italic tracking-tighter">
+              Event <span className="text-secondary not-italic">Stream</span>
             </h2>
-            <button className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">
-              View All
-            </button>
+            <Bell className="w-5 h-5 text-secondary opacity-50" />
           </div>
           <div className="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
             {notifications.length > 0 ? (
@@ -130,50 +170,6 @@ const Dashboard = () => {
                 <p className="text-sm font-bold uppercase tracking-widest italic">No events recorded</p>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Dynamic Chart / Recent Activity Mockup */}
-        <div className="lg:col-span-2 glass rounded-[2.5rem] p-8 flex flex-col gap-8 border border-white/5 shadow-2xl relative overflow-hidden h-[600px]">
-          <div className={`absolute -top-40 -right-40 w-96 h-96 rounded-full blur-[150px] opacity-10 bg-primary`} />
-          
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Activity className="w-5 h-5 text-success" />
-              Latency <span className="opacity-50">Chart</span>
-            </h2>
-            <div className="flex gap-2">
-              <div className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <span className="text-[10px] font-bold text-slate-400 tracking-wider">EVENTS/S</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 rounded-3xl bg-slate-900/30 border border-white/5 flex items-center justify-center group overflow-hidden relative">
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
-            
-            {/* Mock Chart lines */}
-            <div className="w-full h-full flex flex-col justify-end p-8 gap-4 z-10">
-               <div className="flex items-end h-full gap-2 px-10">
-                 {[40, 60, 45, 80, 50, 90, 70, 40, 60, 45, 80, 50, 90, 70].map((h, i) => (
-                   <motion.div 
-                     key={i} 
-                     initial={{ height: 0 }} 
-                     animate={{ height: `${h}%` }}
-                     transition={{ delay: i * 0.05, duration: 1 }}
-                     className="w-full bg-gradient-to-t from-primary/10 to-primary/60 rounded-t-lg relative group-hover:to-primary" 
-                   />
-                 ))}
-               </div>
-               <div className="h-px w-full bg-white/10" />
-            </div>
-
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none">
-               <p className="text-xl font-black uppercase text-white tracking-widest italic bg-black/60 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/10 shadow-2xl">
-                 Real-time data stream <span className="text-primary">Online</span>
-               </p>
-            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getOrderStatus } from "../services/api";
-import { Search, Package, ShoppingCart, Truck, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { Search, Package, ShoppingCart, Truck, CheckCircle, Loader2, AlertCircle, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils/cn";
 
@@ -198,6 +198,6 @@ const TrackOrder = () => {
   );
 };
 
-const ChevronRight = ({ className }) => <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>;
+
 
 export default TrackOrder;
