@@ -18,6 +18,11 @@ export const createOrder = async (productName, amount) => {
   return response.data;
 };
 
+export const getAllOrders = async () => {
+  const response = await api.get("/orders");
+  return response.data;
+};
+
 export const getOrderStatus = async (id) => {
   const response = await api.get(`/orders/${id}/status`);
   return response.data;
