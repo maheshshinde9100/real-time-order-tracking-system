@@ -44,11 +44,24 @@ public class OrderService {
 
         // Update Analytics Counter in Redis
         redisService.incrementOrderCount();
+        
+        // Initialize status in Redis to prevent 404 in tracker
+        redisService.saveOrderStatus(savedOrder.getId(), "CREATED");
 
         // Publish event to Kafka
         orderProducerService.publishOrderCreatedEvent(savedOrder);
 
         return mapToResponse(savedOrder);
+    }
+
+    /**
+     * Fetches all orders from the database.
+     * @return List of order responses.
+     */
+    public java.util.List<OrderResponse> getAllOrders() {
+        return orderRepository.findAll().stream()
+                .map(this::mapToResponse)
+                .collect(java.util.stream.Collectors.toList());
     }
 
     private OrderResponse mapToResponse(Order order) {

@@ -24,20 +24,31 @@ public class OrderConsumerService {
      * Consumes "order-created" events and updates the order status.
      * @param order The order data received from Kafka.
      */
-    @KafkaListener(topics = KafkaConfig.ORDER_CREATED_TOPIC, groupId = "order-group")
+    @KafkaListener(topics = KafkaConfig.ORDER_CREATED_TOPIC)
     public void consumeOrderCreatedEvent(Order order) {
         log.info("Received order-created event for ID: {}", order.getId());
         
-        // Update status to PROCESSING
-        order.setStatus("PROCESSING");
-        orderRepository.save(order);
+        // Journey: PROCESSING -> SHIPPED -> DELIVERED
+        updateAndInform(order, "PROCESSING", "Your order is being processed!");
         
-        // Save status in Redis Cache for fast lookup
-        redisService.saveOrderStatus(order.getId(), order.getStatus());
+        sleep(5000); // 5 seconds processing
+        updateAndInform(order, "SHIPPED", "Your order has been shipped!");
+        
+        sleep(5000); // 5 seconds to deliver
+        updateAndInform(order, "DELIVERED", "Success! Your order has been delivered.");
 
-        // Notify user about order processing
-        redisService.addNotification(order.getUserId(), "Your order is being processed!");
+        log.info("Order journey completed for ID: {}", order.getId());
+    }
 
-        log.info("Order status updated to PROCESSING and cached for ID: {}", order.getId());
+    private void updateAndInform(Order order, String status, String message) {
+        order.setStatus(status);
+        orderRepository.save(order);
+        redisService.saveOrderStatus(order.getId(), status);
+        redisService.addNotification(order.getUserId(), message);
+        log.info("Status updated: {} for Order ID: {}", status, order.getId());
+    }
+
+    private void sleep(long ms) {
+        try { Thread.sleep(ms); } catch (InterruptedException ignored) {}
     }
 }
