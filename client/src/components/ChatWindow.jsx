@@ -70,6 +70,23 @@ const ChatWindow = ({ orderId }) => {
         <div ref={messagesEndRef} />
       </div>
 
+      {user.role === 'ROLE_ADMIN' && (
+        <div className="chat-suggestions" style={{ padding: '0.5rem', display: 'flex', gap: '8px', overflowX: 'auto', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          {['Order received', 'Preparing your food', '10 min delay expected', 'Out for delivery'].map(sug => (
+            <button 
+              key={sug} 
+              onClick={() => {
+                setNewMessage(sug);
+                // Optionally auto-send here if you want
+              }}
+              style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-muted)', cursor: 'pointer', whiteSpace: 'nowrap' }}
+            >
+              {sug}
+            </button>
+          ))}
+        </div>
+      )}
+
       <form onSubmit={handleSend} className="chat-input">
         <input 
           type="text" 

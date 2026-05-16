@@ -37,8 +37,16 @@ function App() {
           <Navbar />
           <div className="app-container">
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={
+                <AuthRedirect>
+                  <Login />
+                </AuthRedirect>
+              } />
+              <Route path="/signup" element={
+                <AuthRedirect>
+                  <Signup />
+                </AuthRedirect>
+              } />
               <Route 
                 path="/" 
                 element={
@@ -47,7 +55,6 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
-              {/* Fallback */}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
@@ -56,5 +63,11 @@ function App() {
     </AuthProvider>
   );
 }
+
+const AuthRedirect = ({ children }) => {
+  const { token } = useAuth();
+  if (token) return <Navigate to="/" />;
+  return children;
+};
 
 export default App;

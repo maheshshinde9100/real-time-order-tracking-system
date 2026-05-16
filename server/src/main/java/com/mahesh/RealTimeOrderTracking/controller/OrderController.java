@@ -33,6 +33,22 @@ public class OrderController {
         return ResponseEntity.ok(orderService.updateOrderStatus(id, status));
     }
 
+    @GetMapping("/my-orders")
+    @Operation(summary = "Get current customer's orders")
+    public ResponseEntity<java.util.List<OrderResponse>> getMyOrders(org.springframework.security.core.Authentication auth) {
+        return ResponseEntity.ok(orderRepository.findByCustomerNameOrderByCreatedAtDesc(auth.getName()).stream()
+                .map(order -> OrderResponse.builder()
+                        .id(order.getId())
+                        .product(order.getProduct())
+                        .quantity(order.getQuantity())
+                        .price(order.getPrice())
+                        .customerName(order.getCustomerName())
+                        .restaurantName(order.getRestaurantName())
+                        .status(order.getStatus())
+                        .build())
+                .collect(java.util.stream.Collectors.toList()));
+    }
+
     @GetMapping
     @Operation(summary = "Get all orders (Admin only)")
     public ResponseEntity<java.util.List<OrderResponse>> getAllOrders() {
