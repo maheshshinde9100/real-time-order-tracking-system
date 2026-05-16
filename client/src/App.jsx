@@ -8,6 +8,9 @@ import Signup from './pages/Signup';
 import CustomerDashboard from './pages/CustomerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAnalytics from './pages/AdminAnalytics';
+import AdminSettings from './pages/AdminSettings';
+import CustomerHistory from './pages/CustomerHistory';
+import CustomerMessages from './pages/CustomerMessages';
 import './index.css';
 
 const ProtectedRoute = ({ children, role }) => {
@@ -39,6 +42,9 @@ function App() {
                 <Route path="/signup" element={<AuthRedirect><Signup /></AuthRedirect>} />
                 <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path="/analytics" element={<ProtectedRoute role="ROLE_ADMIN"><AdminAnalytics /></ProtectedRoute>} />
+                <Route path="/settings" element={<ProtectedRoute role="ROLE_ADMIN"><AdminSettings /></ProtectedRoute>} />
+                <Route path="/history" element={<ProtectedRoute role="ROLE_CUSTOMER"><CustomerHistory /></ProtectedRoute>} />
+                <Route path="/messages" element={<ProtectedRoute role="ROLE_CUSTOMER"><CustomerMessages /></ProtectedRoute>} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </main>

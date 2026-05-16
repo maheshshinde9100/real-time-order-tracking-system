@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import ChatWindow from '../components/ChatWindow';
-import { ClipboardList, MessageSquare, ChevronRight } from 'lucide-react';
+import { ClipboardList, MessageSquare, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminDashboard = () => {
@@ -38,6 +38,18 @@ const AdminDashboard = () => {
     }
   };
 
+  const deleteOrder = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this order?')) return;
+    try {
+      await axios.delete(`http://localhost:8085/api/orders/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      fetchAllOrders();
+    } catch (err) {
+      alert('Error deleting order');
+    }
+  };
+
   const statusOptions = ['PENDING', 'PREPARING', 'OUT_FOR_DELIVERY', 'DELIVERED'];
 
   return (
@@ -67,9 +79,16 @@ const AdminDashboard = () => {
                   </select>
                   <button 
                     onClick={() => setActiveChat(activeChat === order.id ? null : order.id)}
-                    className="btn-logout"
+                    className={`btn-logout ${activeChat === order.id ? 'active' : ''}`}
                   >
                     <MessageSquare size={16} />
+                  </button>
+                  <button 
+                    onClick={() => deleteOrder(order.id)}
+                    className="btn-logout"
+                    style={{ borderColor: 'rgba(255,77,77,0.3)', color: 'var(--primary)' }}
+                  >
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
