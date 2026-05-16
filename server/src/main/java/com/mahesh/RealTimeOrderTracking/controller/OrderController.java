@@ -18,6 +18,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private com.mahesh.RealTimeOrderTracking.repository.OrderRepository orderRepository;
+
     @PostMapping
     @Operation(summary = "Place a new order")
     public ResponseEntity<OrderResponse> placeOrder(@Valid @RequestBody OrderRequest orderRequest) {
@@ -28,6 +31,22 @@ public class OrderController {
     @Operation(summary = "Update order status")
     public ResponseEntity<OrderResponse> updateStatus(@PathVariable Long id, @RequestParam String status) {
         return ResponseEntity.ok(orderService.updateOrderStatus(id, status));
+    }
+
+    @GetMapping
+    @Operation(summary = "Get all orders (Admin only)")
+    public ResponseEntity<java.util.List<OrderResponse>> getAllOrders() {
+        return ResponseEntity.ok(orderRepository.findAll().stream()
+                .map(order -> OrderResponse.builder()
+                        .id(order.getId())
+                        .product(order.getProduct())
+                        .quantity(order.getQuantity())
+                        .price(order.getPrice())
+                        .customerName(order.getCustomerName())
+                        .restaurantName(order.getRestaurantName())
+                        .status(order.getStatus())
+                        .build())
+                .collect(java.util.stream.Collectors.toList()));
     }
 
     @GetMapping("/{id}/status")
