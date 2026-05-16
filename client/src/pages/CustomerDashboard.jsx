@@ -19,14 +19,18 @@ const CustomerDashboard = () => {
 
   const fetchOrders = async () => {
     try {
-      // For simplicity, we fetch all orders and filter on frontend
-      // In a real app, backend should have a /my-orders endpoint
-      const response = await axios.get('http://localhost:8085/swagger-ui/index.html', { // Hack: Use a proper endpoint if available
-         // Actually I'll just use a generic fetch if I had an endpoint. 
-         // Since I only have /api/orders/{id}/status, I'll assume we know the IDs or have a list.
+      const response = await axios.get('http://localhost:8085/api/orders/my-orders', {
+        headers: { Authorization: `Bearer ${token}` }
       });
-    } catch (err) {}
+      setOrders(response.data);
+    } catch (err) {
+      console.error('Error fetching my orders');
+    }
   };
+
+  useEffect(() => {
+    if (token) fetchOrders();
+  }, [token]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
@@ -77,11 +81,21 @@ const CustomerDashboard = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div className="form-group">
               <label>Quantity</label>
-              <input type="number" value={formData.quantity} onChange={(e) => setFormData({...formData, quantity: parseInt(e.target.value)})} min="1" />
+              <input 
+                type="number" 
+                value={formData.quantity || ''} 
+                onChange={(e) => setFormData({...formData, quantity: parseInt(e.target.value) || 0})} 
+                min="1" 
+              />
             </div>
             <div className="form-group">
               <label>Price ($)</label>
-              <input type="number" step="0.01" value={formData.price} onChange={(e) => setFormData({...formData, price: parseFloat(e.target.value)})} />
+              <input 
+                type="number" 
+                step="0.01" 
+                value={formData.price || ''} 
+                onChange={(e) => setFormData({...formData, price: parseFloat(e.target.value) || 0})} 
+              />
             </div>
           </div>
           <button type="submit" className="btn">Place Order</button>
@@ -93,25 +107,42 @@ const CustomerDashboard = () => {
         <div className="tracker-list">
           <AnimatePresence>
             {orders.map(order => (
-              <React.Fragment key={order.id}>
+              <div key={order.id} style={{ marginBottom: '1.5rem' }}>
                 <motion.div className="order-item" layout>
-                  <div>
-                    <h3>{order.product}</h3>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <h3>{order.product}</h3>
+                      <span style={{ color: 'var(--accent)', fontWeight: 700 }}>#{order.id}</span>
+                    </div>
                     <p className="order-meta">{order.restaurantName} • ${order.price}</p>
                     <div className={`status-badge status-${order.status.toLowerCase().replace(/_/g, '-')}`} style={{ marginTop: '10px' }}>
                       {order.status}
                     </div>
                   </div>
-                  <button onClick={() => setActiveChat(activeChat === order.id ? null : order.id)} className="btn-logout" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                    Chat with Restaurant
+                  <button 
+                    onClick={() => setActiveChat(activeChat === order.id ? null : order.id)} 
+                    className={`btn-logout ${activeChat === order.id ? 'active' : ''}`}
+                    style={{ 
+                      borderColor: activeChat === order.id ? 'var(--primary)' : 'var(--accent)', 
+                      color: activeChat === order.id ? 'var(--primary)' : 'var(--accent)',
+                      minWidth: '140px'
+                    }}
+                  >
+                    {activeChat === order.id ? 'Close Chat' : 'Chat with Admin'}
                   </button>
                 </motion.div>
+                
                 {activeChat === order.id && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }}>
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }} 
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    style={{ marginTop: '1rem' }}
+                  >
                     <ChatWindow orderId={order.id} />
                   </motion.div>
                 )}
-              </React.Fragment>
+              </div>
             ))}
           </AnimatePresence>
         </div>

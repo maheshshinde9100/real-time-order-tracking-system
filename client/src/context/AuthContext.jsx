@@ -11,11 +11,15 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setUser({
-          username: decoded.sub,
-          role: decoded.role // Assuming 'role' is in the JWT claims
-        });
-        localStorage.setItem('token', token);
+        if (decoded && decoded.role) {
+          setUser({
+            username: decoded.sub,
+            role: decoded.role
+          });
+          localStorage.setItem('token', token);
+        } else {
+          logout();
+        }
       } catch (err) {
         logout();
       }
