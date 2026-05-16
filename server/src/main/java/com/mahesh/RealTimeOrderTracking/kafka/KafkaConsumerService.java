@@ -12,4 +12,9 @@ public class KafkaConsumerService {
     public void consumeStatus(String message) {
         log.info(">>> [EVENT] Order Status Update Received: {}", message);
     }
+
+    @KafkaListener(topics = "chat-topic", groupId = "order-group")
+    public void consumeChat(String message) {
+        log.info(">>> [EVENT] New Chat Message: {}", message);
+    }
 }
