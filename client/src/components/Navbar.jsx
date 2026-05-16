@@ -22,21 +22,15 @@ const Navbar = () => {
       </div>
       
       <div className="nav-links">
-        {user ? (
+        {user && (
           <>
-            <span className="user-badge">
-              <User size={14} />
-              {user.username} ({user.role.replace('ROLE_', '')})
+            <span className="user-badge" style={{ background: 'rgba(255, 77, 77, 0.1)', color: 'var(--primary)', fontWeight: 600 }}>
+              Live Monitoring Active
             </span>
             <button onClick={handleLogout} className="btn-logout">
               <LogOut size={16} />
               Logout
             </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/signup" className="nav-link btn-signup">Sign Up</Link>
           </>
         )}
       </div>
