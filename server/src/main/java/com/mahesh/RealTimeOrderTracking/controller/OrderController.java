@@ -65,6 +65,14 @@ public class OrderController {
                 .collect(java.util.stream.Collectors.toList()));
     }
 
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete an order (Admin only)")
+    @org.springframework.security.access.prepost.PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
+        orderRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}/status")
     @Operation(summary = "Get current order status")
     public ResponseEntity<String> getStatus(@PathVariable Long id) {

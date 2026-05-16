@@ -21,9 +21,9 @@ const Sidebar = () => {
   ];
 
   const customerLinks = [
-    { to: '/', icon: <LayoutDashboard size={20} />, label: 'Track Orders' },
+    { to: '/', icon: <LayoutDashboard size={20} />, label: 'Order Food' },
     { to: '/history', icon: <Clock size={20} />, label: 'History' },
-    { to: '/messages', icon: <MessageSquare size={20} />, label: 'Messages' },
+    { to: '/messages', icon: <MessageSquare size={20} />, label: 'Chats' },
   ];
 
   const links = user?.role === 'ROLE_ADMIN' ? adminLinks : customerLinks;

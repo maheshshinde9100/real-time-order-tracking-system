@@ -42,7 +42,7 @@ const AdminAnalytics = () => {
     { label: 'Total Orders', value: stats?.totalOrders || 0, icon: <ShoppingBag />, color: 'var(--primary)' },
     { label: 'Active Orders', value: stats?.activeOrders || 0, icon: <Activity />, color: 'var(--accent)' },
     { label: 'Successful Deliveries', value: stats?.deliveredOrders || 0, icon: <CheckCircle2 />, color: '#22c55e' },
-    { label: 'Success Rate', value: `${stats?.successRate.toFixed(1)}%`, icon: <TrendingUp />, color: '#3b82f6' },
+    { label: 'Success Rate', value: `${(stats?.successRate || 0).toFixed(1)}%`, icon: <TrendingUp />, color: '#3b82f6' },
   ];
 
   return (
